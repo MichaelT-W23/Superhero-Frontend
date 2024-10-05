@@ -15,12 +15,19 @@ function SignIn() {
     e.preventDefault();
     try {
       const userData = { username, password };
-      const user = await UserService.authenticateUser(userData);
+      const result = await UserService.authenticateUser(userData);
 
-      if (user) {
+      if (result) {
+        const { user, token } = result;
+
         logout();
-        login(user);
-        navigate('/Home');
+        login(user, token);
+        
+        if (user.role === "User") {
+          navigate('/Home');
+        } else if (user.role === "Admin") {
+          navigate('/AdminDashboard');
+        }
       } else {
         setErrorMessage('Invalid username or password');
       }

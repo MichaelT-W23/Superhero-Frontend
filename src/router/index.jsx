@@ -7,6 +7,7 @@ import Powers from '../views/Powers.jsx';
 import Register from '../views/Register.jsx';
 import SignIn from '../views/SignIn.jsx';
 import Team from '../views/Team.jsx';
+import AdminDashboard from '../views/AdminDashboard.jsx';
 
 function AppRouter() {
   return (
@@ -18,6 +19,7 @@ function AppRouter() {
       <Route path="/Team" element={<Team />} />
       <Route path="/Add" element={<Add />} />
       <Route path="/Character" element={<CharacterPage />} />
+      <Route path="/AdminDashboard" element={<AdminDashboard />} />
     </Routes>
   );
 }

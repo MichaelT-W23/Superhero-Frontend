@@ -20,11 +20,13 @@ function Register() {
       const response = await UserService.addUser(userData);
 
       if (response) {
-        const loginResponse = await UserService.authenticateUser({ username, password });
-
-        if (loginResponse) {
+        const result = await UserService.authenticateUser({ username, password });
+        
+        if (result) {
+          const { user, token } = result;
+        
           authStore.logout();
-          authStore.login(loginResponse);
+          authStore.login(user, token);
           navigate("/Home");  
         } else {
           setErrorMessage("Failed to log in after registration");

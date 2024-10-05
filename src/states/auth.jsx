@@ -23,11 +23,13 @@ export const AuthProvider = ({ children = null }) => {
     localStorage.setItem('user', JSON.stringify(user));
   }, [user]);
 
-  const login = (userData) => {
+  const login = (userData, token) => {
     setUser({
       ...userData,
       superheroes: [],
     });
+
+    localStorage.setItem('token', token); 
 
     dispatch(clearTeam());
   };
@@ -39,7 +41,9 @@ export const AuthProvider = ({ children = null }) => {
       userId: null,
       superheroes: [],
     });
+
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
   };
 
   const setSuperheroes = (superheroes) => {

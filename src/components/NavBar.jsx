@@ -161,7 +161,7 @@ const Navbar = () => {
                 </Link>
               </li>
               <li className={styles.tab} onClick={() => setShowAlert(true)}>
-                <Link to="/Home" className={styles["tab-link"]}>
+                <Link className={styles["tab-link"]}>
                   <p className={styles["tab-name"]}>Sign Out</p>
                 </Link>
               </li>

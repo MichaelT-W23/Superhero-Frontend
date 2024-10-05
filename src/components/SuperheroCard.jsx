@@ -17,7 +17,7 @@ const SuperheroCard = ({ superhero, canNavigate = false, fullLength = true }) =>
   const displayPowers = fullLength ? [
     ...powers,
     ...Array.from({ length: 3 - powers.length }).map(() => ({
-      powerId: Math.floor(Math.random() * 2) + 2, // Random number between 2 and 3
+      powerId: Math.floor(Math.random() * 2) + 2,
       name: 'No power'
     }))
   ] : powers
