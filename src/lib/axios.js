@@ -14,7 +14,7 @@ axiosInstance.interceptors.request.use(
 
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;
-    } else {
+    } else if (config.url !== "/api/users/authenticate" && config.url !== "/api/users/create") {
       console.log('No token found in LocalStorage');
     }
 
