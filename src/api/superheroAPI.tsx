@@ -1,4 +1,6 @@
 // @ts-ignore
+import { AxiosError } from 'axios';
+// @ts-ignore
 import axiosInstance from '../lib/axios';
 
 interface SuperheroDTO {
@@ -32,7 +34,6 @@ export async function fetchAllSuperheroes(): Promise<Superhero[] | null> {
 export async function createNewSuperhero(userId: number, superheroDTO: SuperheroDTO): Promise<any> {
   try {
     const formData = new FormData();
-
     formData.append('name', superheroDTO.name);
     formData.append('realName', superheroDTO.realName);
     formData.append('universe', superheroDTO.universe);
@@ -53,8 +54,11 @@ export async function createNewSuperhero(userId: number, superheroDTO: Superhero
 
     return response.data;
   } catch (error) {
-    console.error('Error adding superhero:', error);
-    return null;
+    if (error instanceof AxiosError) {
+      throw new Error(`API Error: ${error.response?.data || error.message}`);
+    } else {
+      throw new Error('Unexpected error occurred');
+    }
   }
 }
 

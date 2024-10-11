@@ -45,8 +45,7 @@ export const SuperheroService = {
       const superheroCreated = await createNewSuperhero(userId, superheroDTO);
       return superheroCreated;
     } catch (error) {
-      handleError(error);
-      return null;
+      throw error; 
     }
   },
 
