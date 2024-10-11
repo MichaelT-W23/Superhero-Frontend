@@ -22,6 +22,10 @@ const SuperheroCard = ({ superhero, canNavigate = false, fullLength = true }) =>
     }))
   ] : powers
 
+  const handleImageError = (event) => {
+    console.error(`Failed to load image for ${name}`, event);
+  };
+
   return (
     <div
       className={`${styles["superhero-card"]} ${canNavigate ? styles["hoverable"] : ""}`}
@@ -33,6 +37,7 @@ const SuperheroCard = ({ superhero, canNavigate = false, fullLength = true }) =>
         src={`${import.meta.env.VITE_S3_BUCKET}/${image.storedFilename}`}
         alt={name}
         style={{ height: '220px', width: '200px' }}
+        onError={handleImageError}
       />
       <p><strong>Real Name:</strong> {realName}</p>
       <p><strong>Universe:</strong> {universe}</p>
