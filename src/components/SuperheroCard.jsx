@@ -30,7 +30,7 @@ const SuperheroCard = ({ superhero, canNavigate = false, fullLength = true }) =>
     >
       <h2>{name}</h2>
       <img
-        src={`https://superhero-pics.s3.amazonaws.com/${image.storedFilename}`}
+        src={`${import.meta.env.VITE_S3_BUCKET}/${image.storedFilename}`}
         alt={name}
         style={{ height: '220px', width: '200px' }}
       />
