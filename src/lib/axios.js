@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const baseURL = import.meta.env.VITE_REST_API_URL.replace(/^http:\/\//i, 'https://');
+
 const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_REST_API_URL,
+  baseURL: baseURL,
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
@@ -9,7 +11,7 @@ const axiosInstance = axios.create({
 });
 
 
-console.log('Axios Base URL:', import.meta.env.VITE_REST_API_URL);
+console.log('Updated Axios Base URL:', import.meta.env.VITE_REST_API_URL);
 
 
 
@@ -20,7 +22,7 @@ axiosInstance.interceptors.request.use(
 
     console.log('Requesting:', config.baseURL + config.url);
 
-    
+
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;
     } else if (config.url !== "/api/users/authenticate" && config.url !== "/api/users/create") {
