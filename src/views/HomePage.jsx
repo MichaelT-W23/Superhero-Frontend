@@ -7,6 +7,7 @@ import styles from '../styles/views/HomePage.module.css';
 function HomePage() {
   const { user } = useAuth();
   const [superheroes, setSuperheroes] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchSuperheroes = async () => {
@@ -17,6 +18,8 @@ function HomePage() {
         }
       } catch (error) {
         console.error('Failed to fetch superheroes:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -28,12 +31,14 @@ function HomePage() {
   return (
     <div>
       <div className={styles['superheroes-grid']}>
-        {superheroes.length > 0 ? (
+        {loading ? (
+          <p>Loading superheroes...</p>
+        ) : superheroes.length > 0 ? (
           superheroes.map((superhero) => (
             <SuperheroCard key={superhero.superId} superhero={superhero} canNavigate={true} />
           ))
         ) : (
-          <p>Loading superheroes...</p>
+          <p>No Superheroes. Go ahead and add some!</p>
         )}
       </div>
     </div>
