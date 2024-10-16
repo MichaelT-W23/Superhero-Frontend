@@ -12,7 +12,6 @@ function AddCharacterForm() {
   const navigate = useNavigate();
 
   const [showAlert, setShowAlert] = useState(false);
-
   const [message, setMessage] = useState('');
   const [btnColor, setBtnColor] = useState('');
   const [type, setType] = useState('');
@@ -29,6 +28,7 @@ function AddCharacterForm() {
 
   const [availablePowers, setAvailablePowers] = useState([]);
   const [formIsValid, setFormIsValid] = useState(false);
+  const [yearError, setYearError] = useState(false);
 
   useEffect(() => {
     const fetchPowers = async () => {
@@ -75,20 +75,19 @@ function AddCharacterForm() {
     const nameValid = /^[A-Za-z\s]+$/.test(superhero.name);
     const realNameValid = /^[A-Za-z\s]+$/.test(superhero.realName);
     const universeValid = superhero.universe !== "";
-    const yearValid = /^\d{4}$/.test(superhero.yearCreated) && +superhero.yearCreated >= 1900 && +superhero.yearCreated <= 2025;
+    const yearValid = /^\d{4}$/.test(superhero.yearCreated) && +superhero.yearCreated >= 1938 && +superhero.yearCreated <= 2025;
     const powersSelected = superhero.powerIds.length > 0;
     const imageValid = superhero.image !== null;
 
+    setYearError(!yearValid && superhero.yearCreated.length !== 0);
     setFormIsValid(nameValid && realNameValid && universeValid && yearValid && powersSelected && imageValid);
   };
-
 
   const navigateAfterClose = () => {
     if (type == 'success') {
       navigate('/Home');
     }
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -162,9 +161,14 @@ function AddCharacterForm() {
               mask={[/\d/, /\d/, /\d/, /\d/]}
               value={superhero.yearCreated}
               onChange={handleInputChange}
-              className={styles["add-field-input"]}
+              className={`${styles["add-field-input"]} ${yearError ? styles["error-border"] : ""}`}
               name="yearCreated"
             />
+            {yearError && (
+              <p className={styles["error-message"]}>
+                Year must be between 1938 and 2025.
+              </p>
+            )}
           </div>
 
           <div className={styles["field-wrapper"]}>
@@ -209,7 +213,6 @@ function AddCharacterForm() {
         </form>
       </div>
     </div>
-    
   );
 }
 

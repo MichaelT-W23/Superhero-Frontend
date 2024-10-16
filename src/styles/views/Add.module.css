@@ -75,4 +75,15 @@ input[type="checkbox"] {
 .add-submit-button:hover:enabled {
   background-color: #0056b3;
 }
-  
+
+
+.error-border {
+  border-color: red;
+}
+
+.error-message {
+  color: red;
+  margin-top: -10px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
