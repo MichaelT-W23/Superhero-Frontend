@@ -4,7 +4,7 @@ import NavBar from './NavBar.jsx';
 const Layout = ({ children }) => {
   const location = useLocation();
 
-  const noNavBarRoutes = ["/", "/Register"];
+  const noNavBarRoutes = ["/", "/Register", "/Register/"];
 
   return (
     <>
