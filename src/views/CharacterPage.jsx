@@ -100,7 +100,7 @@ function CharacterPage() {
               {isInTeam ? 'Remove from Team' : 'Add to Team'}
             </button>
           </div>
-          {superhero.canDelete && (
+          {superhero?.canDelete && (
             <button 
               className={styles["remove-db-button"]}
               onClick={() => setShowAlert(true)}>Delete Character From Database
